@@ -1,35 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, Text, View} from 'react-native';
-import CompanyData from './components/CompanyData';
-import UserData from './components/UserData';
 
 // components are always have first letter capital
 const App = () => {
-  const fruit = (val)=>{
-    console.warn(val);
-  }
+  const [name, setName] = useState("Shivam Kumar");
+  let data = "Sam"
 
-
-  let data = 100;
-  const vege = (val)=>{
-    data = 200;
-    console.warn(data);
+  const testName = ()=>{
+    setName("Shivam Rajbhar");
+    data = "Peter"
+    // sam should change to peter but not changed after pressing button 
+    console.warn('Sam is not change to Petter (variable not state)');
   }
   return (
     <View>
-      <Text style={{fontSize: 50}}>Button and On Press Event</Text>
-      {/* for not parameter pass */}
-      <Button title='On Press' onPress={fruit} color={'green'}/>   
-      {/* for parameter pass*/}
-      <Button title="On Press 2" onPress={()=>fruit('Hello Shivam')} color={'red'}/> 
+      <Text style={{fontSize: 50}}>State in React Native</Text>
 
-
-      {/* why we use state ,because the data is not updated in style tag */}
-      <Text style={{fontSize: 50}}>{100}</Text>
-      {/* for not parameter pass */}
-      <Button title='On Press' onPress={vege} color={'blue'}/>   
-      {/* for parameter pass*/}
-      <Button title="On Press 2" onPress={()=>vege('Hello Shivam')} color={'black'}/>        
+      {/* after updating state, the component is  re-render */}
+      <Text style={{fontSize: 30}}>{name}</Text>
+      
+      {/* after updating variable, the component is not render */}
+      <Text style={{fontSize: 30}}>{data}</Text> 
+      <Button title='Updata Name' onPress={testName}/>
     </View>
   );
 };
