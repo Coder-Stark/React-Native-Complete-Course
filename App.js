@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
-import {Button, Text, View} from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet} from 'react-native';
+import ExStyles from './style';
 
-// components are always have first letter capital
 const App = () => {
-  const [name, setName] = useState("Bruce");
   return (
     <View>
-      <Text style={{fontSize: 50}}>Props in React Native</Text>
-      <Button title='Update Name' onPress={()=>setName("Shivam")}/>
-      <User name={name} age={22}/>
+      <Text style={{fontSize: 50}}>Styles in React Native</Text>
+
+      <Text style={{fontSize: 30, color:'red', backgroundColor:'yellow'}}>This is Inline Styling</Text>
+
+      <Text style={styles.textBox}>This is Internal Styling</Text>
+      <Text style={styles.textBox}>This is Internal Styling</Text>
+
+
+      <Text style={ExStyles.textBox}>This is External Styling</Text>
+      <Text style={ExStyles.textBox}>This is External Styling</Text>
+
+      <Text style={[{marginTop:20}, styles.textBox, ExStyles.textBox]}>All Styling Combinations</Text>
+
     </View>
   );
 };
-const User = (props) => {
-  console.warn('After pressing Button => ' + props.name + ' , Age => ' + props.age);
-  return (
-    <View style={{backgroundColor: 'green', padding: 5}}>
-      <Text style={{fontSize: 30}}>Name : {props.name}</Text>
-      <Text style={{fontSize: 30}}>Age : {props.age}</Text>
-    </View>
-  );
-};
+
+//internal styling
+const styles = StyleSheet.create({
+  textBox:{
+    fontSize:30,
+    color:'blue',
+    backgroundColor:'gray',
+    marginBottom:10,
+    padding:5,
+    borderWidth:2,
+    borderColor:'red',
+    borderRadius:10,
+    height:50,
+    textAlignVertical:'center',
+    textAlign:'center',
+  },
+});
 
 export default App;
