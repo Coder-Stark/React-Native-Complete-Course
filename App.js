@@ -1,44 +1,36 @@
 import React from 'react';
-import {Text, View, FlatList} from 'react-native';
-import UsersData from './components/UsersData';
+import {SectionList, Text, View} from 'react-native';
 
 const App = () => {
 const users = [
     {
       id: 1,
       name: "Shivam",
-      email:"shiv@gmail.com"
+      data:["ReactJs", "NextJs", "MongoDB", "C++"]
     },
     {
       id: 2,
       name: "Aditya",
-      email:"adi@gmail.com"
+      data:["Business", "finance", "communicatio"]
     },
     {
       id: 3,
       name: "Satyam",
-      email:"satyam@gmail.com"
+      data:["Business", "Factory", "Dye"]
     },
     {
       id: 4,
       name: "Vikas",
-      email:"vikas@gmail.com"
+      data:["Neet", "Mbbs", "BDS"]
     }
   ]
   return (
     <View>
-      <Text style={{fontSize: 50}}>Component In Loop With FlatList</Text>
-      <FlatList
-        data={users}
-
-        /*same as below
-        renderItem={({item})=><View style={styles.box}>
-          <Text style={styles.item}>{item.name}</Text>
-          <Text style={styles.item}>{item.email}</Text>
-        </View>}
-        */
-
-        renderItem={({item})=> <UsersData item={item}/>}      //item={item} => passing props
+      <Text style={{fontSize: 50}}>Section List in React Native</Text>
+      <SectionList 
+        sections={users}
+        renderItem={({item})=><Text style={{fontSize:20, marginLeft:20}}>{item}</Text>}
+        renderSectionHeader={({section:{name}})=><Text style={{fontSize:30, color:"red"}}>{name}</Text>}
       />
     </View>
   );
