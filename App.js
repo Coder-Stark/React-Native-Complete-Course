@@ -1,21 +1,18 @@
-import React , {Component}from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
 
 const App= ()=>{
   return(
     <View>
-      <Text style={{fontSize:50}}>Life Cycle Phases and Methods</Text>
-      <Text style={{fontSize:30, color:"red"}}>There have Three Phases</Text>
-      <Text style={{fontSize:20}}>Mounting</Text>
-      <Text style={{fontSize:20}}>Update</Text>
-      <Text style={{fontSize:20}}>UnMounting</Text>
-      
-      <Text style={{fontSize:30, color:"red"}}>Life Cycle will be executed</Text>
-      <Text style={{fontSize:20}}>When Component Render first time</Text>
-      <Text style={{fontSize:20}}>When Component Update with State</Text>
-      <Text style={{fontSize:20}}>When Component Update with Props</Text>
-      <Text style={{fontSize:20}}>When Component Unmount</Text>
-      <Text style={{fontSize:20}}>On Error</Text>
+      <Text style={{fontSize:50}}>Hooks in React Native</Text>
+      <Text style={{fontSize:30, color:"red"}}>'use' key word defined hooks</Text>
+      <Text style={{fontSize:20}}>hooks can't be use in class based component</Text>
+      <Text style={{fontSize:30, color:"red"}}>Hooks can be used in :</Text>
+      <Text style={{fontSize:20}}>State</Text>
+      <Text style={{fontSize:20}}>Life Cycle methods</Text>
+      <Text style={{fontSize:20}}>Content Api</Text>
+      <Text style={{fontSize:20}}>Ref and Memo</Text>
+      <Text style={{fontSize:25}}>We can make Custom Hooks also</Text>
     </View>
   );
 }
