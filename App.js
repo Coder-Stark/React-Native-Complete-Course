@@ -1,34 +1,23 @@
 import React , {Component}from 'react';
 import {Button, Text, TextInput, View} from 'react-native';
-import Students from './components/StudentsCC';
-class App extends Component {
-  //for calling parent classes's constructor we use super() key word
-  constructor(){
-    super();
-    this.state={
-      name:"Shivam",
-      age: "22"
-    }
-  }
 
-  updateName(val){
-    this.setState({name: val});
-  }
-  render(){
-    return(
-      <View>
-        <Text style={{fontSize: 50}}>State And Props In Class Component</Text>
-
-        <Text style={{fontSize: 20}}>{this.state.name}  {this.state.age}</Text>
-        <TextInput
-          placeholder='Enter Your name'
-          onChangeText={(text)=>this.updateName(text)}
-        />
-        <Button title='Press Me'/>
-        <Students name={this.state.name}/>
-      </View>
-    )
-  }
+const App= ()=>{
+  return(
+    <View>
+      <Text style={{fontSize:50}}>Life Cycle Phases and Methods</Text>
+      <Text style={{fontSize:30, color:"red"}}>There have Three Phases</Text>
+      <Text style={{fontSize:20}}>Mounting</Text>
+      <Text style={{fontSize:20}}>Update</Text>
+      <Text style={{fontSize:20}}>UnMounting</Text>
+      
+      <Text style={{fontSize:30, color:"red"}}>Life Cycle will be executed</Text>
+      <Text style={{fontSize:20}}>When Component Render first time</Text>
+      <Text style={{fontSize:20}}>When Component Update with State</Text>
+      <Text style={{fontSize:20}}>When Component Update with Props</Text>
+      <Text style={{fontSize:20}}>When Component Unmount</Text>
+      <Text style={{fontSize:20}}>On Error</Text>
+    </View>
+  );
 }
 
 
