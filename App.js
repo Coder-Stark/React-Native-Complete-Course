@@ -1,58 +1,64 @@
-import React from 'react';
-import {Text, TouchableHighlight, View, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const App = ()=>{
+  const [selectedRadio, setSelectedRadio] = useState(1);
   return(
     <View style={styles.main}>
-      {/* default button have not custom styling so we use belows method */}
-      <Text style={{fontSize:44}}>TouchableHighLight Or TouchableOpacity</Text>
-        <TouchableHighlight>
-          <Text style={styles.button}>Button</Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button, styles.success]}>Success</Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button, styles.primary]}>Primary</Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button, styles.warning]}>Warning</Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button, styles.error]}>Error</Text>
-        </TouchableHighlight>
+      <Text style={{fontSize:44}}>Radio Button using TouchableOpacity</Text>
+      <TouchableOpacity onPress={()=>setSelectedRadio(1)}>
+          <View style={styles.radioWrapper}>
+            <View style={styles.radioButton}>
+              {
+                selectedRadio === 1 ? <View style={styles.radioBg}></View> : null
+              }
+            </View>
+            <Text style={styles.radioText}>Radio 1</Text>
+          </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={()=>setSelectedRadio(2)}>
+          <View style={styles.radioWrapper}>
+            <View style={styles.radioButton}>
+              {
+                selectedRadio === 2 ? <View style={styles.radioBg}></View> : null
+              }
+            </View>
+            <Text style={styles.radioText}>Radio 2</Text>
+          </View>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   main:{
-    flex:1
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center"
   },
-  button:{
-    backgroundColor:"gray",
-    color: "white",
-    fontSize:25,
-    textAlign:"center",
-    padding:5,
-    margin:10,
-    borderRadius:10,
-    shadowColor:"black",
-    elevation:10,
-    shadowOpacity:1,
+  radioWrapper:{
+    flexDirection:"row",
+    alignItems:"center"
   },
-  success:{
-    backgroundColor:"green"
+  radioButton:{
+    height:40,
+    width:40,
+    borderColor:"black",
+    borderWidth:2,
+    borderRadius:20,
+    margin:10
   },
-  primary:{
-    backgroundColor:"blue"
+  radioBg:{
+    height:28,
+    width:28,
+    backgroundColor:"black",
+    borderRadius:14,
+    margin:4,
   },
-  warning:{
-    backgroundColor:"gold"
+  radioText:{
+    fontSize:25
   },
-  error:{
-    backgroundColor:"red"
-  }
 })
 
 export default App;
