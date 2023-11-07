@@ -2,31 +2,45 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const App = ()=>{
+  const skills = [
+    {
+      id:1,
+      name: "C++"
+    },
+    {
+      id:2,
+      name: "JavaScript"
+    },
+    {
+      id:3,
+      name: "ReactJs"
+    },
+    {
+      id:4,
+      name: "NextJs"
+    },
+  ]
   const [selectedRadio, setSelectedRadio] = useState(1);
   return(
     <View style={styles.main}>
-      <Text style={{fontSize:44}}>Radio Button using TouchableOpacity</Text>
-      <TouchableOpacity onPress={()=>setSelectedRadio(1)}>
-          <View style={styles.radioWrapper}>
-            <View style={styles.radioButton}>
-              {
-                selectedRadio === 1 ? <View style={styles.radioBg}></View> : null
-              }
-            </View>
-            <Text style={styles.radioText}>Radio 1</Text>
+      <Text style={{fontSize:44}}>Dynamic Radio Button using TouchableOpacity</Text>
+      <View style={styles.radioContainer}>
+      {
+        skills.map((item, index)=>
+        <TouchableOpacity
+        key={index}
+        onPress={()=>setSelectedRadio(item.id)}>
+        <View style={styles.radioWrapper}>
+          <View style={styles.radioButton}>
+            {
+              selectedRadio === item.id ? <View style={styles.radioBg}></View> : null
+            }
           </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={()=>setSelectedRadio(2)}>
-          <View style={styles.radioWrapper}>
-            <View style={styles.radioButton}>
-              {
-                selectedRadio === 2 ? <View style={styles.radioBg}></View> : null
-              }
-            </View>
-            <Text style={styles.radioText}>Radio 2</Text>
-          </View>
-      </TouchableOpacity>
+          <Text style={styles.radioText}>{item.name}</Text>
+        </View>
+        </TouchableOpacity>)
+      }
+      </View>
     </View>
   );
 }
@@ -37,9 +51,13 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center"
   },
+  radioContainer: {
+    flexDirection: "column", // Arrange radio buttons vertically
+    alignItems: "column", // Column align within the parent container
+  },
   radioWrapper:{
     flexDirection:"row",
-    alignItems:"center"
+    alignItems:"center",
   },
   radioButton:{
     height:40,
