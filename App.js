@@ -1,45 +1,29 @@
-import React, { useState } from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet, ActivityIndicator, Button} from 'react-native';
 
 const App = ()=>{
-  const skills = [
-    {
-      id:1,
-      name: "C++"
-    },
-    {
-      id:2,
-      name: "JavaScript"
-    },
-    {
-      id:3,
-      name: "ReactJs"
-    },
-    {
-      id:4,
-      name: "NextJs"
-    },
-  ]
-  const [selectedRadio, setSelectedRadio] = useState(1);
+  const [show, setshow] = React.useState(false);
+  const displayLoader = ()=>{
+    setshow(true);
+
+    //use in api call in 3 seconds
+    setTimeout(() => {
+      setshow(false);
+    }, 3000);
+  }
   return(
     <View style={styles.main}>
-      <Text style={{fontSize:44}}>Dynamic Radio Button using TouchableOpacity</Text>
-      <View style={styles.radioContainer}>
-      {
-        skills.map((item, index)=>
-        <TouchableOpacity
-        key={index}
-        onPress={()=>setSelectedRadio(item.id)}>
-        <View style={styles.radioWrapper}>
-          <View style={styles.radioButton}>
-            {
-              selectedRadio === item.id ? <View style={styles.radioBg}></View> : null
-            }
-          </View>
-          <Text style={styles.radioText}>{item.name}</Text>
-        </View>
-        </TouchableOpacity>)
-      }
+      <View>
+        <Text style={{fontSize:50}}>Activity Indicator Or Loader</Text>
+      </View>
+      <View style={styles.content}>
+        <ActivityIndicator size={70} color= "red" animating={show} />
+        
+        {/* same as above function  // in android we can give size anything but in ios we havet 3 choices small medium large*/}
+        {
+          show ? <ActivityIndicator size={"medium"} color= "green" /> : null
+        }
+        <Button title='Show Loader' onPress={displayLoader}/>
       </View>
     </View>
   );
@@ -51,31 +35,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center"
   },
-  radioContainer: {
-    flexDirection: "column", // Arrange radio buttons vertically
-    alignItems: "column", // Column align within the parent container
-  },
-  radioWrapper:{
-    flexDirection:"row",
+  content:{
+    flex:1,
     alignItems:"center",
-  },
-  radioButton:{
-    height:40,
-    width:40,
-    borderColor:"black",
-    borderWidth:2,
-    borderRadius:20,
-    margin:10
-  },
-  radioBg:{
-    height:28,
-    width:28,
-    backgroundColor:"black",
-    borderRadius:14,
-    margin:4,
-  },
-  radioText:{
-    fontSize:25
+    justifyContent:"center"
   },
 })
 
