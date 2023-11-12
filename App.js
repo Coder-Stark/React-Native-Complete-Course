@@ -1,23 +1,23 @@
 import React from 'react';
-import {Text, View, StyleSheet, Button, Modal} from 'react-native';
+import {Text, View, StyleSheet, Pressable} from 'react-native';
 
 const App = ()=>{
-  const [showModal, setShowModal] = React.useState(false);
   return(
     <View style={styles.main}>
       <View>
-        <Text style={{fontSize:47}}>Modal or DialogBox</Text>
+        <Text style={{fontSize:50}}>Pressable (Button with More Functionality)</Text>
       </View>
-      <Modal   transparent={true} visible={showModal} animationType='slide' >
-        <View style={styles.wrapperView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Click to Disappear</Text>
-            <Button title='Close Modal' onPress={()=>setShowModal(false)}/>
-          </View>
-        </View>
-      </Modal>
       <View style={styles.content}>
-        <Button title='Open Modal' onPress={()=>setShowModal(true)}/>
+      <Pressable
+        // onPress={()=>alert("Hello World")}
+
+        onPress={()=>{console.warn("Simple Press")}}
+        onLongPress={()=>{console.warn("Long Press")}}         //takes 0.5 seconds or 500ms
+        onPressIn={()=>{console.warn("Press In")}}
+        onPressOut={()=>{console.warn("Press Out")}}
+      >
+        <Text style={styles.pressableBtn}>Pressable Button</Text>
+      </Pressable>
       </View>
     </View>
   );
@@ -29,23 +29,15 @@ const styles = StyleSheet.create({
   },
   content:{
     flex:1,
-    justifyContent:"flex-end",
-  },
-  wrapperView:{
-    flex:1,
     justifyContent:"center",
     alignItems:"center",
   },
-  modalView:{
-    backgroundColor:"white",
-    padding:60,
-    borderRadius:20,
-    shadowColor:"black",
-    elevation:10,
-  },
-  modalText:{
+  pressableBtn:{
+    backgroundColor:"blue",
+    padding:10,
+    borderRadius:10,
     fontSize:30,
-    marginBottom:20,
+    color:"white",
   }
 })
 
