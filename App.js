@@ -1,29 +1,23 @@
 import React from 'react';
-import {Text, View, StyleSheet, ActivityIndicator, Button} from 'react-native';
+import {Text, View, StyleSheet, Button, Modal} from 'react-native';
 
 const App = ()=>{
-  const [show, setshow] = React.useState(false);
-  const displayLoader = ()=>{
-    setshow(true);
-
-    //use in api call in 3 seconds
-    setTimeout(() => {
-      setshow(false);
-    }, 3000);
-  }
+  const [showModal, setShowModal] = React.useState(false);
   return(
     <View style={styles.main}>
       <View>
-        <Text style={{fontSize:50}}>Activity Indicator Or Loader</Text>
+        <Text style={{fontSize:47}}>Modal or DialogBox</Text>
       </View>
+      <Modal   transparent={true} visible={showModal} animationType='slide' >
+        <View style={styles.wrapperView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Click to Disappear</Text>
+            <Button title='Close Modal' onPress={()=>setShowModal(false)}/>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.content}>
-        <ActivityIndicator size={70} color= "red" animating={show} />
-        
-        {/* same as above function  // in android we can give size anything but in ios we havet 3 choices small medium large*/}
-        {
-          show ? <ActivityIndicator size={"medium"} color= "green" /> : null
-        }
-        <Button title='Show Loader' onPress={displayLoader}/>
+        <Button title='Open Modal' onPress={()=>setShowModal(true)}/>
       </View>
     </View>
   );
@@ -32,14 +26,27 @@ const App = ()=>{
 const styles = StyleSheet.create({
   main:{
     flex:1,
-    alignItems:"center",
-    justifyContent:"center"
   },
   content:{
     flex:1,
-    alignItems:"center",
-    justifyContent:"center"
+    justifyContent:"flex-end",
   },
+  wrapperView:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+  },
+  modalView:{
+    backgroundColor:"white",
+    padding:60,
+    borderRadius:20,
+    shadowColor:"black",
+    elevation:10,
+  },
+  modalText:{
+    fontSize:30,
+    marginBottom:20,
+  }
 })
 
 export default App;
