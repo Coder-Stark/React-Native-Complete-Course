@@ -1,25 +1,17 @@
-import React , {useState} from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet} from 'react-native';
 
 const App = ()=>{
-  const [show, setShow] = useState(false);
   return(
     <View style={styles.main}>
       <View>
-        <Text style={{fontSize:50}}>Custom Modals Or DialogBox</Text>
+        <Text style={{fontSize:40}}>Navigation with React Native (Similar as Routing in Websites)</Text>
       </View>
       <View style={styles.content}>
-      {
-        show ? 
-        <View style={styles.modal}>
-          <View style={styles.body}>
-            <Text style={styles.text}>Click to Disappear</Text>
-            <Button title='Close Modal' onPress={()=>setShow(false)}/>
-          </View>
-        </View> :
-        null
-      }
-      <Button title='Open DialogBox' onPress={()=>setShow(true)}/>
+        <Text style={{fontSize:30, color:"red"}}>Types of Navigation</Text>
+        <Text style={{fontSize:20}}>Stack</Text>
+        <Text style={{fontSize:20}}>Drawer</Text>
+        <Text style={{fontSize:20}}>Tab</Text>
       </View>
     </View>
   );
@@ -31,25 +23,7 @@ const styles = StyleSheet.create({
   },
   content:{
     flex:1,
-    justifyContent:"flex-end"
-  },
-  modal:{
-    flex:1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  body:{
-    height:150,
-    width:300,
-    padding:20,
-    backgroundColor:'white',
-    justifyContent:'flex-end',
-    borderRadius:20,
-  },
-  text:{
-    fontSize:30,
-    textAlign:'center',
+    alignItems:"center",
   }
 })
 export default App;
