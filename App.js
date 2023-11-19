@@ -1,22 +1,35 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Button} from 'react-native';
+import {NavigationContainer} from "@react-navigation/native"
+import {createNativeStackNavigator} from "@react-navigation/native-stack"
 
+const Stack = createNativeStackNavigator();
 const App = ()=>{
   return(
-    <View style={styles.main}>
-      <View>
-        <Text style={{fontSize:40}}>Navigation with React Native (Similar as Routing in Websites)</Text>
-      </View>
-      <View style={styles.content}>
-        <Text style={{fontSize:30, color:"red"}}>Types of Navigation</Text>
-        <Text style={{fontSize:20}}>Stack</Text>
-        <Text style={{fontSize:20}}>Drawer</Text>
-        <Text style={{fontSize:20}}>Tab</Text>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Login" component={Login}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
+const Home = (props)=>{                         //some props are already present in navigation
+  return(
+    <View style={styles.homeView}>
+      <Text style={{fontSize:40}}>Home Screen</Text>
+      <Button title="Move to Login" onPress={()=>props.navigation.navigate("Login")}/>
+    </View>
+  )
+}
+const Login = ()=>{                            //back arrow created automatically
+  return(
+    <View style={styles.loginView}>
+      <Text style={{fontSize:40}}>Login Screen</Text>
+    </View>
+  )
+}
 const styles = StyleSheet.create({
   main:{
     flex:1,
@@ -24,6 +37,16 @@ const styles = StyleSheet.create({
   content:{
     flex:1,
     alignItems:"center",
+  },
+  homeView:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+  loginView:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center"
   }
 })
 export default App;
