@@ -1,53 +1,40 @@
 import React from 'react';
-import {Button, TextInput} from 'react-native';
-import {NavigationContainer} from "@react-navigation/native";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {Home} from "./components/Home";
-import {Login} from "./components/Login";
+import {Text, View} from 'react-native';
+import {NavigationContainer} from "@react-navigation/native"       //same on all navigation
+// import {createNativeStackNavigator} from "@react-navigation/native-stack"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
+import { styles } from './components/Styles';
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 const App = ()=>{
-  const btnAction = ()=>{
-    console.warn("Button Pressed")
-  }
   return(
+    // <View>
+    //   <Text style={{fontSize:50}}>Tab Navigation</Text>
+    // </View>
     <NavigationContainer>
-      <Stack.Navigator
-          //for all screens connected like login or home both
-          screenOptions={{
-            //down code is for individual screen
-            headerStyle:{
-              backgroundColor:"orange"
-            },
-            headerTitle:()=><Button title='Left' onPress= {btnAction}/>,        //for adding in left part of navbar
-            // headerRight:()=><Button title='Right' onPress={btnAction}/>,        //for adding in right part of navbar
-            headerRight:()=><Search/>,                                                    //for calling component
-            headerTitleStyle:{
-              color:"white",
-              fontSize:30,
-            }
-          }}
-          >
-        <Stack.Screen name="Home" component={Home} options={{
-          //down code is for individual screen
-          title:"Home Screen",  
-          headerStyle:{
-            backgroundColor:"purple"
-          },
-          headerTitleStyle:{
-            color:"white",
-            fontSize:30,
-          }
-        }}/>
-        <Stack.Screen name="Login" component={Login}/>
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Login" component={Login}/>
+        <Tab.Screen name="SignUp" component={SignUp}/>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
-const Search = ()=>{
+const Login = ()=>{
   return(
-    <TextInput placeholder='Search' placeholderTextColor={"white"}/>
+    <View style={styles.loginView}>
+      <Text style={{fontSize:40}}>Tab Navigation</Text>
+      <Text style={{fontSize:30}}>Login Screen</Text>
+    </View>
+  )
+}
+
+const SignUp = ()=>{
+  return(
+    <View style={styles.SignUpView}>
+      <Text style={{fontSize:30}}>SignUp Screen</Text>
+    </View>
   )
 }
 

@@ -31,5 +31,10 @@ export const styles = StyleSheet.create({
       width:220,
       textAlignVertical:'center',
       textAlign:'center',
-    }
+    },
+    SignUpView:{
+      flex:1,
+      justifyContent:"center",
+      alignItems:"center"
+    },
 })
