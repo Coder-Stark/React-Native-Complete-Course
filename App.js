@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Text, View} from 'react-native';
-import {NavigationContainer} from "@react-navigation/native"       //same on all navigation
-// import {createNativeStackNavigator} from "@react-navigation/native-stack"
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { styles } from './components/Styles';
-
-// const Stack = createNativeStackNavigator();
-// const Tab = createBottomTabNavigator();
-const Tab = createMaterialTopTabNavigator();
 const App = ()=>{
+  const [data, setData] = useState(undefined);
+  const getAPIData = async()=>{
+    //api call
+    const url = "https://jsonplaceholder.typicode.com/posts/1";
+    let result = await fetch(url);
+    result = await result.json();
+    // console.warn(result);
+    setData(result);
+  }
+  useEffect(()=>{
+    getAPIData();
+  },[]);                        //[] = for calling only once
   return(
-    // <View>
-    //   <Text style={{fontSize:50}}>Top Tab Navigation</Text>
-    // </View>
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Login" component={Login}/>
-        <Tab.Screen name="SignUp" component={SignUp}/>
-      </Tab.Navigator>
-    </NavigationContainer>
+    <View>
+      <Text style={{fontSize:50, textAlign:"center"}}>API Call</Text>
+      {
+        data ? <View>
+          <Text style={{fontSize:25, padding: 5 , margin:5, fontWeight:"bold"}}>Fetched Data</Text>
+          <Text style={{fontSize:25, padding: 5 , margin:5}}>ID : {data.id}</Text>
+          <Text style={{fontSize:25, padding: 5 , margin:5}}>UserID : {data.userId}</Text>
+          <Text style={{fontSize:25, padding: 5 , margin:5}}>Title : {data.title}</Text>
+          <Text style={{fontSize:25, padding: 5 , margin:5}}>Body : {data.body}</Text>
+        </View> : null
+      }
+    </View>
   );
 }
 
-const Login = ()=>{
-  return(
-    <View style={styles.loginView}>
-      <Text style={{fontSize:40}}>Top Tab Navigation</Text>
-      <Text style={{fontSize:30}}>Login Screen</Text>
-    </View>
-  )
-}
-
-const SignUp = ()=>{
-  return(
-    <View style={styles.SignUpView}>
-      <Text style={{fontSize:30}}>SignUp Screen</Text>
-    </View>
-  )
-}
 
 export default App;
