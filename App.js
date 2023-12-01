@@ -2,15 +2,17 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native"       //same on all navigation
 // import {createNativeStackNavigator} from "@react-navigation/native-stack"
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { styles } from './components/Styles';
 
 // const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 const App = ()=>{
   return(
     // <View>
-    //   <Text style={{fontSize:50}}>Tab Navigation</Text>
+    //   <Text style={{fontSize:50}}>Top Tab Navigation</Text>
     // </View>
     <NavigationContainer>
       <Tab.Navigator>
@@ -24,7 +26,7 @@ const App = ()=>{
 const Login = ()=>{
   return(
     <View style={styles.loginView}>
-      <Text style={{fontSize:40}}>Tab Navigation</Text>
+      <Text style={{fontSize:40}}>Top Tab Navigation</Text>
       <Text style={{fontSize:30}}>Login Screen</Text>
     </View>
   )
