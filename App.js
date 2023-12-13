@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 const App = ()=>{
   const [data, setData] = useState([]);
-  const getAPIData = async ()=>{
+  const getAPIData = async()=>{
+    // console.warn("Called");
+
     const url = "https://jsonplaceholder.typicode.com/posts";
     let result = await fetch(url);
     result = await result.json();
     setData(result);
-  };
+    // console.warn(result);                     //data shows in console log
+  }
+
   useEffect(()=>{
     getAPIData();
-  },[]);
-
+  },[])
   return(
-    <ScrollView>
-      <Text style={{fontSize:50, textAlign:"center"}}>List With API Call</Text>
-      <Text style={{fontSize:25, padding: 5 , margin:5, fontWeight:"bold"}}>Fetched Data</Text>
+    <View>
+      <Text style={{fontSize:50, textAlign:"center"}}>FlatList With API Data</Text>
       {
-        data.length ? data.map((item)=>{
-          return(
-            <View style={{padding: 5 , margin:5, borderBottomColor:"black", borderBottomWidth:1}}>
-              {/* <Text style={{fontSize:20}}>UserId : {item.userId}</Text> */}
-              <Text style={{fontSize:20, backgroundColor:"gray"}}>Id : {item.id}</Text>
-              <Text style={{fontSize:20}}>Title : {item.title}</Text>
-              <Text style={{fontSize:20}}>Body : {item.body}</Text>
-            </View>
-          )
-        }):
+        data.length ?
+        <FlatList                                  //have 2 major props data and renderItem
+          data={data}
+          renderItem={({item})=>{
+            return(
+              <View style={{padding: 5 , margin:5, borderBottomColor:"black", borderBottomWidth:1}}>
+                <Text style={{fontSize:20, backgroundColor:"orange"}}>Id : {item.id}</Text>
+                <Text style={{fontSize:20}}>Title : {item.title}</Text>
+                <Text style={{fontSize:20}}>Body : {item.body}</Text>
+              </View>
+            )
+          }}
+        /> :
         null
       }
-    </ScrollView>
+    </View>
   );
 }
-
 
 export default App;
