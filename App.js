@@ -1,39 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
 const App = ()=>{
-  const [data, setData] = useState([]);
-  const getAPIData = async()=>{
-    // console.warn("Called");
-
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    let result = await fetch(url);
-    result = await result.json();
-    setData(result);
-    // console.warn(result);                     //data shows in console log
-  }
-
-  useEffect(()=>{
-    getAPIData();
-  },[])
   return(
     <View>
-      <Text style={{fontSize:50, textAlign:"center"}}>FlatList With API Data</Text>
-      {
-        data.length ?
-        <FlatList                                  //have 2 major props data and renderItem
-          data={data}
-          renderItem={({item})=>{
-            return(
-              <View style={{padding: 5 , margin:5, borderBottomColor:"black", borderBottomWidth:1}}>
-                <Text style={{fontSize:20, backgroundColor:"orange"}}>Id : {item.id}</Text>
-                <Text style={{fontSize:20}}>Title : {item.title}</Text>
-                <Text style={{fontSize:20}}>Body : {item.body}</Text>
-              </View>
-            )
-          }}
-        /> :
-        null
-      }
+      <Text style={{fontSize:50, textAlign:"center"}}>Install Json Server</Text>
+      <Text style={{fontSize:30, margin:10}}>URL : https://www.npmjs.com/package/json-server</Text>
+      <Text style={{fontSize:30, margin:10}}>Package : npm install -g json-server</Text>
+      <Text style={{fontSize:30, margin:10}}>Create a Folder(API) and create a db.json file</Text>
+      <Text style={{fontSize:30, margin:10}}>Start server in folder with command : json-server --watch db.json</Text>
+      <Text style={{fontSize:30, margin:10}}>Server Started on local host 3000</Text>
     </View>
   );
 }
