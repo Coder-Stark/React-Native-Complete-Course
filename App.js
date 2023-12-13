@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 const App = ()=>{
   return(
     <View>
-      <Text style={{fontSize:50, textAlign:"center"}}>Install Json Server</Text>
+      <Text style={{fontSize:50, textAlign:"center"}}>Install Json Server </Text>
       <Text style={{fontSize:30, margin:10}}>URL : https://www.npmjs.com/package/json-server</Text>
       <Text style={{fontSize:30, margin:10}}>Package : npm install -g json-server</Text>
       <Text style={{fontSize:30, margin:10}}>Create a Folder(API) and create a db.json file</Text>
