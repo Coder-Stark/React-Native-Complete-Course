@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
+// const url = "http://10.0.2.2:3000/users";                 //replaces with http://192.168.0.103:3000/users   {connect emulator with local ip address}
 const App = ()=>{
-  const [data, setData] = useState([]);
-  const getAPIdata = async()=>{
-    // console.warn("called");
-    const url = "http://10.0.2.2:3000/users";                 //replaces with http://192.168.0.103:3000/users   {connect emulator with local ip address}
-    let result = await fetch(url);
-    result = await result.json();
-    setData(result);
+  const saveData = async () => {
+    try {
+      console.warn("test");
+      const data = { name: "John Doe", age: 30, email: "zxt@gmail.com" };
+      const url = "http://10.0.2.2:3000/users";
+      let result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (!result.ok) {
+        throw new Error('Failed to save data');
+      }
+      const responseJson = await result.json();
+      console.warn("Data Saved to DataBase", responseJson);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
-  useEffect(()=>{
-    getAPIdata();
-  },[])
+  
+
   return(
     <View>
-      <Text style={{fontSize:50, textAlign:"center"}}>Call Json Server API</Text>
-      {
-        data.length ? 
-        data.map((item)=>{
-          return(
-            <View style={{padding:10, borderColor:"black", borderWidth:1}}>
-              <Text style={{fontSize:30}}>Name: {item.name}</Text>
-              <Text style={{fontSize:30}}>Age: {item.age}</Text>
-              <Text style={{fontSize:30}}>Email: {item.email}</Text>
-            </View>
-          )
-        }):
-        null
-      }
+      <Text style={{fontSize:50, textAlign:"center"}}>Simple POST API</Text>
+      <Button title="Save Data" onPress={saveData}/>
     </View>
   );
 }
