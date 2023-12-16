@@ -1,114 +1,66 @@
-import React, { useState } from 'react';
-import {Button, Text, View, StyleSheet, TextInput} from 'react-native';
+import React , {useEffect, useState} from 'react';
+import {Text, View, StyleSheet, Button} from 'react-native';
 // const url = "http://10.0.2.2:3000/users";                 //replaces with http://192.168.0.103:3000/users   {connect emulator with local ip address}
 const App = ()=>{
-    const [name, setName] = useState('');
-    const [age, setAge] = useState(0);
-    const [email, setEmail] = useState('');
-
-    const [nameError, setNameError] = useState('');
-    const [ageError, setAgeError] = useState('');
-    const [emailError, setEmailError] = useState('');
-
-    const saveData = async ()=>{
-
-      if(!name){
-        setNameError(true);
-      }else{
-        setNameError(false);
-      }
-
-      if(!age){
-        setAgeError(true);
-      }else{
-        setAgeError(false);
-      }
-
-      if(!email){
-        setEmailError(true);
-      }else{
-        setEmailError(false);
-      }
-
-      if(!name || !age || !email){
-        return false;
-      }
-      console.warn("next");
-      console.warn(name);
-      const url = "http://10.0.2.2:3000/users";
-      let result = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // body: JSON.stringify({name: name, age: age,email: email})       //same as below
-        body: JSON.stringify({name, age, email})
-      });
-      result = await result.json();
-      if(result){
-        console.warn("Data saved successfully");
-      }
+  const [data, setData] = useState([]);
+  const getApiData = async()=>{
+    const url = "http://10.0.2.2:3000/users";
+    let result = await fetch(url);
+    result = await result.json();
+    // console.warn(result);
+    if(result){
+      setData(result);
     }
+  }
+  useEffect(()=>{
+    getApiData();
+  },[])
+  return(
+    <View style={styles.container}>
+      <Text style={styles.header}>List With API Data</Text>
 
-    return(
-    <View>
-      <Text style={{fontSize:50, textAlign:"center"}}>Simple Form Validation</Text>
-      <TextInput
-        style={styles.input}
-        value= {name}
-        onChangeText={text => setName(text)}
-        type="text"
-        placeholder="Enter Name"
-      />
-      {
-        nameError ?
-        <Text style={styles.errorText}>Please Enter Valid Name</Text>
-        : null
-      }
-        
-      <TextInput
-        style={styles.input}
-        value= {age}
-        onChangeText={text => setAge(text)}
-        type="number"
-        placeholder="Enter Age"
-      />
-      {
-        ageError ?
-        <Text style={styles.errorText}>Please Enter Valid Age</Text>
-        : null
-      }
-
-      <TextInput
-        style={styles.input}
-        value= {email}
-        onChangeText={text => setEmail(text)}
-        type="text"
-        placeholder="Enter Email"
-      />
-      {
-        emailError ?
-        <Text style={styles.errorText}>Please Enter Valid Email</Text>
-        : null
-      }
-      <Button title = "Save Data" onPress={() => saveData()} />
+      {/* for coulmns */}
+      <View style={styles.dataWrapper}>
+                <View style={{flex:1, margin:2, padding:2}}><Text >Id</Text></View>
+                <View style={{flex:0.8, margin:2, padding:2}}><Text >Name</Text></View>
+                <View style={{flex:2, margin:2, padding:2}}><Text >Email</Text></View>
+        </View>
+        {
+          data.length ? 
+          data.map((item)=>{
+            return(
+              <View style={styles.dataWrapper}>
+                <View style={{flex:1, margin:2, padding:2}}><Text >{item.id}</Text></View>
+                <View style={{flex:1, margin:2, padding:2}}><Text >{item.name}</Text></View>
+                <View style={{flex:1, margin:2, padding:2}}><Text >{item.email}</Text></View>
+                <Button title="Delete" />
+                <Button title="Update" />
+              </View>
+            )
+          }) : 
+          null
+        }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  input:{
-    height: 40,
-    margin: 12,
-    marginBottom:5,
-    borderWidth: 1,
-    padding: 10,
-    fontSize:20
+  header:{
+    fontSize:50, 
+    textAlign:"center",
+    // backgroundColor:"red"
   },
-  errorText:{
-    color:"red",
-    fontSize:20,
-    marginLeft: 12
+  container: {
+    borderWidth:4,
+    borderColor:"green"
+  },
+  dataWrapper:{
+    // flex: 1,
+    flexDirection: "row",
+    padding: 5,
+    margin: 5,
+    backgroundColor:"orange",
+    justifyContent: "space-around",
   }
 })
 export default App;
