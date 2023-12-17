@@ -12,12 +12,25 @@ const App = ()=>{
       setData(result);
     }
   }
+
+  const deleteUser = async(id)=>{
+    const url = "http://10.0.2.2:3000/users";
+    // console.warn(`${url}/${id}`);
+    let result = await fetch(`${url}/${id}`, {
+      method : "DELETE"
+    });
+    result = await result.json();
+    if(result){
+      console.warn(`User ${id} deleted successfully`);
+      getApiData();                                 //for refreshing UI simultaneously otherwise it will delete from Database but not from UI
+    }
+  }
   useEffect(()=>{
     getApiData();
   },[])
   return(
     <View style={styles.container}>
-      <Text style={styles.header}>List With API Data</Text>
+      <Text style={styles.header}>Delete API Method</Text>
 
       {/* for coulmns */}
       <View style={styles.dataWrapper}>
@@ -33,7 +46,7 @@ const App = ()=>{
                 <View style={{flex:1, margin:2, padding:2}}><Text >{item.id}</Text></View>
                 <View style={{flex:1, margin:2, padding:2}}><Text >{item.name}</Text></View>
                 <View style={{flex:1, margin:2, padding:2}}><Text >{item.email}</Text></View>
-                <Button title="Delete" />
+                <Button title="Delete" onPress={()=>deleteUser(item.id)} />
                 <Button title="Update" />
               </View>
             )
