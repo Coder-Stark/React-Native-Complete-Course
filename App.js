@@ -1,5 +1,5 @@
 import React , {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, Button, Modal} from 'react-native';
+import {Text, View, StyleSheet, Button, Modal, TextInput} from 'react-native';
 // const url = "http://10.0.2.2:3000/users";                 //replaces with http://192.168.0.103:3000/users   {connect emulator with local ip address}
 const App = ()=>{
   const [data, setData] = useState([]);
@@ -37,7 +37,7 @@ const App = ()=>{
   },[])
   return(
     <View style={styles.container}>
-      <Text style={styles.header}>Pass Data To Modal</Text>
+      <Text style={styles.header}>Populate Data In Input Fields</Text>
       {/* for coulmns */}
       <View style={styles.dataWrapper}>
         <View style={{flex:1, margin:2, padding:2}}><Text>Id</Text></View>
@@ -52,8 +52,15 @@ const App = ()=>{
               <View style={{flex:1, margin:2, padding:2}}><Text>{item.id}</Text></View>
               <View style={{flex:1, margin:2, padding:2}}><Text>{item.name}</Text></View>
               <View style={{flex:1, margin:2, padding:2}}><Text>{item.email}</Text></View>
-              <Button title="Delete" onPress={()=>deleteUser(item.id)} />
-              <Button title="Update" onPress={()=>updateUser(item)} />
+              <Button title="Delete" 
+                onPress={()=>deleteUser(item.id)}
+              />
+              <Button title="Update"
+                onPress={()=>{
+                  updateUser(item)
+                  console.warn("After Clicking Update")
+                }}
+              />
             </View>
           )
         }) : 
@@ -61,30 +68,46 @@ const App = ()=>{
       }
 
       <Modal visible={showModal} transparent={true} >
-        {/* <UserModal setShowModal={setShowModal}  selectedUser={selectedUser}/>        passing selectedUser as props to UserModal */}
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={{fontSize:20}}>{selectedUser.name}</Text>
-           <Button title='Close' color='red' onPress={()=>setShowModal(false)} />
-            {console.warn(selectedUser)}
-          </View>
-        </View>
+        {/* passing selectedUser as props to UserModal */}
+        <UserModal setShowModal={setShowModal}  selectedUser={selectedUser}/>
       </Modal>
     </View>
   );
 }
+// same as above but getting error
+const UserModal = (props)=>{
+  // console.warn(props.selectedUser);
+  const [id, setId] = useState(undefined);
+  const [name, setName] = useState(undefined);
+  const [email, setEmail] = useState(undefined);
 
-// const UserModal = (props)=>{
-//   console.warn(props.selectedUser);
-//   return(
-//     <View style={styles.centeredView}>
-//       <View style={styles.modalView}>
-//         <Text>{props.selectedUser.name}</Text>
-//       </View>
-//       <Button title='Close' color='red' onPress={()=>props.setShowModal(false)} />
-//     </View>
-//   )
-// }
+  useEffect(()=>{
+    if(props.selectedUser){
+      setId(props.selectedUser.id.toString());               //input fields should be in string
+      setName(props.selectedUser.name);
+      setEmail(props.selectedUser.email);
+    }
+  }, [props.selectedUser]);                         //it will call only iff selectedUser changes
+  return(
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        {/* <Text>{props.selectedUser.name}</Text> */}
+        <TextInput style={styles.input} placeholder='Id' value={id} onChangeText={(text)=>setId(text)} />
+        <TextInput style={styles.input} placeholder='Name' value={name} onChangeText={(text)=>setName(text)} />
+        <TextInput style={styles.input} placeholder='Email' value={email} onChangeText={(text)=>setEmail(text)} />
+
+        <View style={styles.btn}>
+          <Button title='Update' color='green'/>
+        </View>
+        <View style={styles.btn}>
+          <Button title='Close' color='red' 
+            onPress={()=>props.setShowModal(false)} 
+          />
+        </View>
+      </View>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   header:{
@@ -118,6 +141,18 @@ const styles = StyleSheet.create({
     shadowColor:"black",
     elevation:5,
     shadowOpacity:0.3
+  },
+  input:{
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
+    width:250,
+    fontSize:20
+  },
+  btn:{
+    margin:10
   }
 
 })
