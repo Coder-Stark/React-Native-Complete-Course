@@ -37,7 +37,7 @@ const App = ()=>{
   },[])
   return(
     <View style={styles.container}>
-      <Text style={styles.header}>Populate Data In Input Fields</Text>
+      <Text style={styles.header}>API PUT Method - Update with API</Text>
       {/* for coulmns */}
       <View style={styles.dataWrapper}>
         <View style={{flex:1, margin:2, padding:2}}><Text>Id</Text></View>
@@ -69,7 +69,7 @@ const App = ()=>{
 
       <Modal visible={showModal} transparent={true} >
         {/* passing selectedUser as props to UserModal */}
-        <UserModal setShowModal={setShowModal}  selectedUser={selectedUser}/>
+        <UserModal setShowModal={setShowModal}  selectedUser={selectedUser} getApiData={getApiData}/>
       </Modal>
     </View>
   );
@@ -88,6 +88,24 @@ const UserModal = (props)=>{
       setEmail(props.selectedUser.email);
     }
   }, [props.selectedUser]);                         //it will call only iff selectedUser changes
+
+  const updateUser = async()=>{
+    console.warn(id, name, email);
+    const url = "http://10.0.2.2:3000/users";
+    let result = await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({id, name, email})
+    });
+    result = await result.json();
+    if(result){
+      console.warn(`User ${id} updated successfully`);
+      props.getApiData();
+      props.setShowModal(false);
+    }
+  }
   return(
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
@@ -97,7 +115,9 @@ const UserModal = (props)=>{
         <TextInput style={styles.input} placeholder='Email' value={email} onChangeText={(text)=>setEmail(text)} />
 
         <View style={styles.btn}>
-          <Button title='Update' color='green'/>
+          <Button title='Update' color='green'
+            onPress={updateUser}
+          />
         </View>
         <View style={styles.btn}>
           <Button title='Close' color='red' 
