@@ -5,6 +5,8 @@ const App = ()=>{
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
+  const [searchData, setSearchData] = useState([]);           //for search function
+
   const getApiData = async()=>{
     const url = "http://10.0.2.2:3000/users";
     let result = await fetch(url);
@@ -32,17 +34,45 @@ const App = ()=>{
     setShowModal(true);
     setSelectedUser(data);
   }
+  const searchUser = async (text)=>{
+    const url = `http://10.0.2.2:3000/users?q=${text}`;
+    console.warn(url);
+    let result = await fetch(url);
+    result = await result.json();
+    if(result){
+      setSearchData(result);
+    }
+  }
   useEffect(()=>{
     getApiData();
   },[])
   return(
     <View style={styles.container}>
-      <Text style={styles.header}>API PUT Method - Update with API</Text>
+      <Text style={styles.header}>Search with API</Text>
       {/* for coulmns */}
       <View style={styles.dataWrapper}>
         <View style={{flex:1, margin:2, padding:2}}><Text>Id</Text></View>
         <View style={{flex:0.8, margin:2, padding:2}}><Text>Name</Text></View>
-        <View style={{flex:2, margin:2, padding:2}}><Text>Email</Text></View>
+        <View style={{flex:1, margin:2, padding:2}}><Text>Email</Text></View>
+        <View style={{flext:1}}>
+          <TextInput 
+            style={{ margin: 2, padding:2, borderWidth:1, textAlign:'center', borderColor: "green" , width:200}}
+            placeholder='Search'
+            onChangeText={(text)=>searchUser(text)}
+          />
+          {
+            searchData.length ?
+            searchData.map((item)=>{
+              return(
+                <View style={{backgroundColor:"red"}}>
+                  <View style={{ margin:2, padding:2}}><Text>Id : {item.id}</Text></View>
+                  <View style={{ margin:2, padding:2}}><Text>Name : {item.name}</Text></View>
+                  <View style={{ margin:2, padding:2}}><Text>Email : {item.email}</Text></View>
+                </View>
+              );
+            }): null
+          }
+        </View>
       </View>
       {
         data.length ?
