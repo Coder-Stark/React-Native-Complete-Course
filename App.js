@@ -1,27 +1,19 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View} from 'react-native';
 const App = ()=>{
 
   return(
     <View>
-      <Text style={{fontSize:50}}>Element Inspector</Text>
-      <Text style={{fontSize:30, color:'red'}}>For Opening Inspector: </Text>
-      <Text style={{fontSize:30, color:'red'}}>Press Ctrl + m</Text>
-      <View style={styles.box}>
-
-      </View>
+      <Text style={{fontSize:50}}>Redux With React Native</Text>
+      <Text style={{fontSize:25, color:'red'}}>Redux is a predictable state container library primarily used with React to manage the application's state. It serves as a centralized store for the entire application's state, making it easier to manage and update data across different components.</Text>
+      <Text style={{fontSize:30, color:'orange'}}>Key concepts in Redux:</Text>
+      <Text style={{fontSize:30, color:'green'}}>1. Store</Text>
+      <Text style={{fontSize:30, color:'green'}}>2. Actions</Text>
+      <Text style={{fontSize:30, color:'green'}}>3. Reducers</Text>
+      <Text style={{fontSize:30, color:'green'}}>4. Dispatch</Text>
+      <Text style={{fontSize:30, color:'green'}}>5. Selectors</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  box:{
-    width:100,
-    height:100,
-    backgroundColor:'green',
-    margin:10,
-    padding:20
-  }
-})
 
 export default App;
