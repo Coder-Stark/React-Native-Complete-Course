@@ -4,14 +4,14 @@ const App = ()=>{
 
   return(
     <View>
-      <Text style={{fontSize:50}}>Redux With React Native</Text>
-      <Text style={{fontSize:25, color:'red'}}>Redux is a predictable state container library primarily used with React to manage the application's state. It serves as a centralized store for the entire application's state, making it easier to manage and update data across different components.</Text>
-      <Text style={{fontSize:30, color:'orange'}}>Key concepts in Redux:</Text>
-      <Text style={{fontSize:30, color:'green'}}>1. Store</Text>
-      <Text style={{fontSize:30, color:'green'}}>2. Actions</Text>
-      <Text style={{fontSize:30, color:'green'}}>3. Reducers</Text>
-      <Text style={{fontSize:30, color:'green'}}>4. Dispatch</Text>
-      <Text style={{fontSize:30, color:'green'}}>5. Selectors</Text>
+      <Text style={{fontSize:50, textAlign:'center'}}>Redux Architecture</Text>
+      <Text style={{fontSize:40, color:'orange'}}>Redux Flow</Text>
+      <Text style={{fontSize:25, color:'green'}}>View</Text>
+      <Text style={{fontSize:25, color:'green'}}>Action</Text>
+      <Text style={{fontSize:25, color:'green'}}>Reducers</Text>
+      <Text style={{fontSize:25, color:'green'}}>Store </Text>
+      <Text style={{fontSize:25, color:'green'}}>View</Text>
+      <Text style={{fontSize:30, color:'orange'}}>In Saga flow after action there is another box or component to handle asynchronous action of API Calls</Text>
     </View>
   );
 }
