@@ -1,20 +1,36 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View, ScrollView} from 'react-native';
+import Header from './components/Header';
+import Product from './components/Product';
 const App = ()=>{
-
+  const product = [
+    {
+        name: "Samsung",
+        price: 20000,
+        color: 'gray',
+        Image : 'https://m.media-amazon.com/images/I/41kyuER2HjL._SX300_SY300_QL70_FMwebp_.jpg'
+    },
+    {
+        name : "Apple",
+        price: 30000,
+        color: 'silver',
+        Image: 'https://m.media-amazon.com/images/I/412CKVTe8dL._SX300_SY300_QL70_FMwebp_.jpg'
+    },
+    {
+        name: 'Motorola',
+        price: 10000,
+        color: 'blue',
+        Image: 'https://m.media-amazon.com/images/I/61bUETZj9AL._SY741_.jpg'
+    }
+  ]
   return(
-    <View>
-      <Text style={{fontSize:50, textAlign:'center'}}>Redux Installation & File Structure</Text>
-      <Text style={{fontSize:40, color:'orange'}}>Install Redux Package</Text>
-      <Text style={{fontSize:25, color:'green'}}>-redux = npm i redux</Text>
-      <Text style={{fontSize:25, color:'green'}}>-react-redux = npm i react-redux</Text>
-      <Text style={{fontSize:25, color:'green'}}>-redux toolkit = npm i @reduxjs/toolkit</Text>
-      <Text style={{fontSize:40, color:'orange'}}>File Structure</Text>
-      <Text style={{fontSize:25, color:'green'}}>/components/-/redux</Text>
-      <Text style={{fontSize:25, color:'green'}}>/redux/action.js</Text>
-      <Text style={{fontSize:25, color:'green'}}>/redux/reducer.js</Text>
-      <Text style={{fontSize:25, color:'green'}}>/redux/store.js</Text>
-      <Text style={{fontSize:25, color:'green'}}>/redux/rootReducer.js</Text>
+    <View style={{flex:1}}>
+        <Header/>
+        <ScrollView>
+        {
+          product.map((item)=><Product item={item}/>)        //passing props
+        }
+        </ScrollView>
     </View>
   );
 }
