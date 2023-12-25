@@ -5,7 +5,7 @@ const Header = ()=>{
   return(
     <View>
       <View>
-        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>UI For Add To Cart With Redux - Make Reducer</Text>
+        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>UI For Add To Cart With Redux - Store And Redux Wrapper</Text>
       </View>
       <View>
         <Text style={{fontSize:25, textAlign:'right', padding:5, backgroundColor:'orange'}}>0</Text>
