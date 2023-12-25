@@ -11,7 +11,7 @@ const Header = ()=>{
   return(
     <View>
       <View>
-        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Remove Cart Items From Redux</Text>
+        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>React Navigation With Redux</Text>
       </View>
       <View>
         <Text style={{fontSize:25, textAlign:'right', padding:5, backgroundColor:'orange'}}>Items Added : {cartItems}</Text>
