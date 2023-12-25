@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Text, View, Image, Button} from 'react-native';
-import { addToCart } from './redux/action';
+import { addToCart, removeFromCart } from './redux/action';
 import { useDispatch, useSelector } from 'react-redux';
 const Product = (props) => {
   const item = props.item;
@@ -11,14 +11,20 @@ const Product = (props) => {
     // console.warn('called', item);
     disPatch(addToCart(item));                               //addToCart(item) not work directly we have to dispatch using useDispatch in redux
   }
+  const handleRemoveFromCart = (item) => {
+    // console.warn(item);
+    disPatch(removeFromCart(item.name));
+  }
+  
   useEffect(() => {
-    if(cartItems && cartItems.length){
-      cartItems.forEach((element) => {
-        // console.warn(element);
-        if(element.name == item.name){
-          setIsAdded(true);
-        }
-      });
+    //if item not match then add to cart else remove
+    let result = cartItems.filter((element) => {
+      return element.name == item.name;
+    })
+    if(result.length){
+      setIsAdded(true);
+    }else{
+      setIsAdded(false);
     }
   })
   return (
@@ -33,7 +39,7 @@ const Product = (props) => {
       {
         isAdded ? 
         <View style={{margin: 5, padding: 5}}>
-          <Button title="Remove To Cart"  onPress={()=>handleAddToCart(item)}/>
+          <Button title="Remove From Cart"  onPress={()=>handleRemoveFromCart(item)}/>
         </View> :
         <View style={{margin: 5, padding: 5}}>
           <Button title="Add To Cart"  onPress={()=>handleAddToCart(item)}/>
