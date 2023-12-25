@@ -11,7 +11,7 @@ const Header = ()=>{
   return(
     <View>
       <View>
-        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Get Redux Data</Text>
+        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Remove To Cart</Text>
       </View>
       <View>
         <Text style={{fontSize:25, textAlign:'right', padding:5, backgroundColor:'orange'}}>Items Added : {cartItems}</Text>
