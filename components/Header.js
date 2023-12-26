@@ -11,7 +11,7 @@ const Header = ()=>{
   return(
     <View>
       <View>
-        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Add Saga In Redux</Text>
+        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Call API With Saga</Text>
         {/* Redux Saga, which is used to manage side effects in your application. Side effects are 
         operations that occur outside of the typical Redux flow, such as asynchronous tasks like 
         fetching data, interacting with APIs, or handling timeouts. Redux Saga provides a way to 

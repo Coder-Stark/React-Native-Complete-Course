@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Text, View} from 'react-native';
+import { useDispatch, useSelector} from 'react-redux';
+import { getUserList } from './redux/action';
+
 const UserList = ()=>{
+  const dispatch = useDispatch();
+  const userList = useSelector((state)=>state.reducer);
+  useEffect(()=>{
+    dispatch(getUserList());
+  })
+  console.warn('In Component', userList);
   return(
     <View>
       <View>
