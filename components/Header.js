@@ -11,7 +11,11 @@ const Header = ()=>{
   return(
     <View>
       <View>
-        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>React Navigation With Redux</Text>
+        <Text style={{fontSize:25, textAlign:'center', padding:5,}}>Add Saga In Redux</Text>
+        {/* Redux Saga, which is used to manage side effects in your application. Side effects are 
+        operations that occur outside of the typical Redux flow, such as asynchronous tasks like 
+        fetching data, interacting with APIs, or handling timeouts. Redux Saga provides a way to 
+        handle these side effects more effectively by using ES6 generators. */}
       </View>
       <View>
         <Text style={{fontSize:25, textAlign:'right', padding:5, backgroundColor:'orange'}}>Items Added : {cartItems}</Text>
